@@ -22,7 +22,20 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+:root{
+  --base: #ffc600;
+  --spacing: 18px;
+  --blur: 10px;
+}
+img{
+  padding: var(--spacing);
+  background: var(--base);
+  filter: blur(var(--blur));
+}
 
+,h1{
+  color: var(--base);
+}
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -46,6 +59,15 @@
   </style>
 
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+    function handleUpdate(){
+      const suffix = this.dataset.sizing || ''; //this.dataset selects everything in css that has data- in it. Data sizing adjusts the sizing in pixels of the data
+      // || '' is for the color picker to avoid error
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);//Changes the root value to this.value and then appends the suffix on to it
+    }
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));//listens for any change in the slider and then calls handleUpdate() function if there is change
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
   </script>
 
 </body>
