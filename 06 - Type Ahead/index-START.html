@@ -24,7 +24,7 @@ fetch(endpoint).then(blob => blob.json())
 //we use the spread operator since we are using a constant variable called endpoint
 function findMatches(wordToMatch, cities){
   return cities.filter(place => {
-    //need to figure out what cities and states match
+    //need to figure out what cities and states match using the filter method
     const regex = new RegExp(wordToMatch, 'gi');
     return place.city.match(regex) || place.state.match(regex)
   });
@@ -35,7 +35,7 @@ function numberWithCommas(x){
 function displayMatches(){
 const matchArray = findMatches(this.value, cities); //gets your data
 
-const html = matchArray.map(place => {
+const html = matchArray.map(place => { 
   const regex = new RegExp(this.value, 'gi'); //plucks the word and replaces it with a highlighted word
   const cityName = place.city.replace(regex, `<span class ="hl">${this.value}</span>`);
 
